@@ -5,3 +5,26 @@ services:
     ports:
       - "5000:5000"
     restart: unless-stopped
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: internship-node-exporter
+    ports:
+      - "9100:9100"
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: internship-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: internship-grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
