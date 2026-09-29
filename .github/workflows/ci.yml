@@ -1,0 +1,34 @@
+name: DevOps Internship CI
+
+on:
+  push:
+    branches:
+      - main
+      - feature/docker-setup
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose
+        run: docker compose config
+
+      - name: Build application image
+        run: docker build -t internship-app:test .
+
+      - name: Verify project files
+        run: |
+          test -f Dockerfile
+          test -f compose.yaml
+          test -f README.md
+          test -f app/app.py
+
+      - name: CI completed
+        run: echo "DevOps Internship CI completed successfully"
