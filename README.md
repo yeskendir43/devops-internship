@@ -9,3 +9,4 @@ Training project for practicing basic DevOps workflows.
 - Nginx
 - CI/CD
 - Monitoring
+- Docker Compose deployment
